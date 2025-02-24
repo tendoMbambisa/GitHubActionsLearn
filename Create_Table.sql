@@ -6,7 +6,7 @@ CREATE TABLE `production`.`trainer` (
     phone VARCHAR(25),
     poke_id INT NOT NULL,
     FOREIGN KEY (poke_id)
-        REFERENCES `production`.`pokemon`(id) 
-        ON DELETE CASCADE 
+        REFERENCES `production`.`pokemon` (id)
+        ON DELETE CASCADE
         ON UPDATE CASCADE
 );
