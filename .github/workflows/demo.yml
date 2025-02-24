@@ -1,9 +1,7 @@
 name: SQL Linting
 
 on:
-  push:
-    branches:
-      - main
+  push:  # Runs on every commit to any branch
   pull_request:
 
 jobs:
