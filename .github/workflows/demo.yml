@@ -2,7 +2,9 @@ name: SQL Linting
 
 on:
   push:
-  pull_request:
+    branches:
+      - main  # Runs when pushing to main
+  pull_request:  # Runs on PRs
 
 jobs:
   lint-sql:
@@ -11,29 +13,15 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Git
-        run: sudo apt-get install git
-
       - name: Install SQLFluff
-        run: pip install --upgrade sqlfluff
-        
-      - name: Auto-fix SQL Issues
-        run: sqlfluff fix --dialect postgres .
-
-      - name: Commit and Push Fixes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto-fixed SQL linting issues" || echo "No changes to commit"
-          git push || echo "No changes to push"
+        run: pip install sqlfluff
 
       - name: Run SQLFluff Linter
-        run: sqlfluff lint --dialect postgres . || exit 1
+        run: sqlfluff lint --dialect mysql .
