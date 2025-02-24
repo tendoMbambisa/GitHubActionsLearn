@@ -1,7 +1,7 @@
 name: SQL Linting
 
 on:
-  push:  # Runs on every commit to any branch
+  push:
   pull_request:
 
 jobs:
@@ -24,6 +24,13 @@ jobs:
       - name: Auto-fix SQL Issues
         run: sqlfluff fix --dialect postgres .
 
+      - name: Commit and Push Fixes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto-fixed SQL linting issues" || echo "No changes to commit"
+          git push || echo "No changes to push"
 
       - name: Run SQLFluff Linter
         run: sqlfluff lint --dialect postgres . || exit 1
