@@ -1,3 +1,4 @@
+-- sqlfluff: disable=PRS
 CREATE TABLE production.pokemon (
  id INT IDENTITY (1,1) PRIMARY KEY,
  name VARCHAR (255) NOT NULL,
@@ -14,5 +15,5 @@ CREATE TABLE production.pokemon (
  FOREIGN KEY (poke_id)
    REFERENCES production.pokemon(id) ON DELETE CASCADE ON UPDATE CASCADE -- ON CASCADE MEANS THIS SHOULD DELETE THE OTHER RECORD TOO
    );
-
+-- sqlfluff: enable=PRS
    
