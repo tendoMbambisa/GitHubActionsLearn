@@ -20,6 +20,10 @@ jobs:
 
       - name: Install SQLFluff
         run: pip install sqlfluff
+        
+      - name: Auto-fix SQL Issues
+        run: sqlfluff fix --dialect postgres .
+
 
       - name: Run SQLFluff Linter
         run: sqlfluff lint --dialect postgres . || exit 1
