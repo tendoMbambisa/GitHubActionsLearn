@@ -1,1 +1,1 @@
-CREATE TABLE users (id INT, name VARCHAR(50));
+CREATE TABLE users (id INT, email VARCHAR(50));
