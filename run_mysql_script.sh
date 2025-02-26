@@ -1,11 +1,16 @@
 #!/bin/bash
 
-# MySQL credentials (update these based on your setup)
-DB_USER="root"
-DB_PASS="yourpassword"
+# MySQL host
 DB_HOST="localhost"
 
-# Run the SQL script
-mysql -h $DB_HOST -u $DB_USER -p$DB_PASS < create_db.sql
+# Check if MySQL is running
+if ! mysqladmin ping -h "$DB_HOST" --silent; then
+    echo "Error: MySQL is not running on $DB_HOST."
+    exit 1
+fi
 
-echo "Database and table created successfully!"
+# Run the SQL script without username and password
+mysql -h $DB_HOST --skip-password < create_db.sql
+
+echo "✅ Database and table created successfully!"
+
